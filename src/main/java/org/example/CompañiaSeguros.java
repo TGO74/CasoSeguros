@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.UUID;
-
-
-
+import java.util.stream.Collectors;
 
 
 public class CompañiaSeguros {
@@ -79,12 +77,13 @@ public class CompañiaSeguros {
 
 
         for (Cliente c : clientes) {
-            if (cliente.getNombreCliente().equals(c.getNombreCliente())) {
-                System.out.println("El cliente ya existe");
+            if (!cliente.getRutCliente().equals(c.getRutCliente())) {
+                clientes.add(cliente);
+
             } else {
 
+                System.out.println("El cliente ya existe");
 
-                clientes.add(cliente);
             }
         }
 
@@ -138,9 +137,6 @@ public class CompañiaSeguros {
     }
 
 
-
-
-
     public void despedirVendedor(Vendedor vendedor) {
 
         for (Vendedor v : vendedores) {
@@ -165,18 +161,6 @@ public class CompañiaSeguros {
     }
 
 
-    public void eliminarPolizaSeguro(PolizaSeguro seguro) {
-
-        for (PolizaSeguro s : segurosVendidos) { //arreglar
-            if (seguro.getNumeroPoliza().equals(s.getNumeroPoliza())) {
-                segurosVendidos.remove(seguro);
-            } else {
-                System.out.println("El seguro no existe");
-            }
-        }
-    }
-
-
     public Cliente buscarCliente(String rutCliente) {
 
         for (Cliente c : clientes) {
@@ -195,60 +179,35 @@ public class CompañiaSeguros {
 
 
     public ArrayList<Cliente> buscarClienteTerceraEdad() {
-
-        System.out.println("Clientes tercera edad");
         ArrayList<Cliente> clientesTerceraEdad = new ArrayList<Cliente>();
 
         for (Cliente c : clientes) {
             if (c.getEdadCliente() >= 65) {
-
                 clientesTerceraEdad.add(c);
-
-
-
-                return clientesTerceraEdad;
             }
         }
-        return null; // Devolver null si no se encuentra ningún cliente de tercera edad
-    }
-}
 
-
-
-
-
-
-   /* public void listarVendedores() {
-        for (Vendedor vendedor : vendedores) {
-            System.out.println(vendedor.getNombre());
-        }
+        return clientesTerceraEdad;
     }
 
-    public void listarClientes() {
+    public void imprimirClientes() {
         for (Cliente cliente : clientes) {
-            System.out.println(cliente.getNombre());
+            System.out.println("Nombre: " + cliente.getNombreCliente());
+            System.out.println("RUT: " + cliente.getRutCliente());
+            System.out.println("Edad: " + cliente.getEdadCliente());
+            System.out.println("Dirección: " + cliente.getDireccionCliente());
+            System.out.println("Correo: " + cliente.getCorreoCliente());
+            System.out.println("----------");
         }
     }
-
-    public void listarSeguros() {
-        for (Seguro seguro : seguros) {
-            System.out.println(seguro.getNombre());
-        }
-    }
-
-    public void listarVendedoresClientes() {
-        for (Vendedor vendedor : vendedores) {
-            System.out.println(vendedor.getNombre());
-            for (Cliente cliente : clientes) {
-                if (cliente.getVendedor().equals(vendedor)) {
-                    System.out.println(cliente.getNombre());
-                }
-            }
-        }
-    }
-
-    public void listarClientesVendedores() {
-        for (Cliente cliente : clientes)
 
 }
-*/
+
+
+
+
+
+
+
+
+
